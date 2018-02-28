@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans SYSTEM "http://www.springframework.org/dtd/spring-beans.dtd">
+<!-- ==========================================================================
+*     SPRING BEAN DEFINITION FILE
+*     Javaworld Article - Simple Sequence Workflow Example
+*
+*     Reuse all the beans definde in the main rateDrop.xml
+*     but add in the TimerTask infasturcte and necessary polling 
+*     workflow activity.
+  ========================================================================== -->
+<beans>
+	
+
+	<bean id="polling" 
+		class="org.iocworkflow.test.sequence.ratedrop.PollRates"/>
+		
+	
+	<!-- simple sequence workflow process -->
+	<bean id="pollingProcessor" class="org.iocworkflow.SequenceProcessor" >
+		<property name="activities">
+			<list>
+				<ref bean="polling"/> <!--Poll for rate drops -->
+				<ref bean="activity1"/><!--Build recipients-->
+				<ref bean="activity2"/><!--Construct DOM tree-->
+				<ref bean="activity3"/><!--Apply XSL Transform-->
+				<ref bean="activity4"/><!--Write Audit Data-->
+				<ref bean="activity5"/><!--Attempt to send message-->
+			</list>
+		</property>
+		<property name="defaultErrorHandler">
+			<ref bean="defaultErrorHandler"></ref>
+		</property>
+		<property name="processContextClass">
+			<value>org.iocworkflow.test.sequence.ratedrop.RateDropContext</value>
+		</property>
+	</bean>
+	
+    <!-- timer to invoke airline rate drop workflow -->
+	<bean id="checkInvokingTask" 
+		class="org.springframework.scheduling.timer.MethodInvokingTimerTaskFactoryBean">
+		<property name="targetObject">
+			<ref bean="pollingProcessor"/>
+		</property>
+		<property name="targetMethod">
+			<value>doActivities</value>
+		</property>
+	</bean>
+	<bean id="pollingProcessorTask" 
+		class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<!-- wait 10 milli seconds before starting repeated execution -->
+		<property name="delay">
+			<value>10</value>
+		</property>
+		<!-- run every 1 second -->
+		<property name="period">
+			<value>1000</value>
+		</property>
+		<property name="timerTask">
+			<ref bean="checkInvokingTask"/>
+		</property>
+	</bean>
+
+    <!-- Timer factoies are started as soon as the Spring ApplicationContext loads-->
+	<bean id="timerFactory" 
+		class="org.springframework.scheduling.timer.TimerFactoryBean">
+		<property name="scheduledTimerTasks">
+			<list>
+				<!-- actual airline processor -->
+				<ref bean="pollingProcessorTask"/>
+			</list>
+		</property>
+	</bean>
+</beans>
