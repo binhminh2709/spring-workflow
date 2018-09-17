@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans SYSTEM "http://www.springframework.org/dtd/spring-beans.dtd">
+<!-- ==========================================================================
+*     SPRING BEAN DEFINITION FILE
+*     Javaworld Article - Simple Sequence Workflow Example
+  ========================================================================== -->
+<beans>
+
+  <bean class="org.iocworkflow.test.Log4jConfig" id="log4jconfig">
+    <property name="configXml">
+      <value>org/iocworkflow/test/log4j.xml</value>
+    </property>
+  </bean>
+
+
+  <bean class="org.iocworkflow.test.sequence.simple.Activity1" id="activity1"/>
+
+  <bean class="org.iocworkflow.test.sequence.simple.Activity2" id="activity2"/>
+
+  <bean class="org.iocworkflow.test.sequence.simple.Activity3" id="activity3"/>
+
+  <bean class="org.iocworkflow.test.sequence.simple.SimpleErrorHandler" id="defaultErrorHandler"/>
+
+  <bean class="org.iocworkflow.test.sequence.simple.SimpleContext" id="simpleContext" singleton="false"/>
+
+
+  <!-- simple sequence workflow process -->
+  <bean class="org.iocworkflow.SequenceProcessor" id="simpleProcessor">
+    <property name="activities">
+      <list>
+        <ref bean="activity1"/>
+        <ref bean="activity2"/>
+        <ref bean="activity3"/>
+      </list>
+    </property>
+    <property name="defaultErrorHandler">
+      <ref bean="defaultErrorHandler"></ref>
+    </property>
+    <property name="processContextClass">
+      <value>org.iocworkflow.test.sequence.simple.SimpleContext</value>
+    </property>
+  </bean>
+
+
+</beans>

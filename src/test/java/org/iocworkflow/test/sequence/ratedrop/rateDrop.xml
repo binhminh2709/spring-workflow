@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans SYSTEM "http://www.springframework.org/dtd/spring-beans.dtd">
+<!-- ==========================================================================
+*     SPRING BEAN DEFINITION FILE
+*     Javaworld Article - Airline Sequence Workflow Example
+  ========================================================================== -->
+<beans>
+
+  <bean class="org.iocworkflow.test.Log4jConfig" id="log4jconfig">
+    <property name="configXml">
+      <value>org/iocworkflow/test/log4j.xml</value>
+    </property>
+  </bean>
+
+
+  <bean class="org.iocworkflow.test.sequence.ratedrop.BuildRecipients" id="activity1"/>
+
+  <bean class="org.iocworkflow.test.sequence.ratedrop.ConstructDOMTree" id="activity2"/>
+
+  <bean class="org.iocworkflow.support.XslTransformActivity" id="activity3">
+    <property name="xslLocation">
+      <value>classpath:org/iocworkflow/test/sequence/ratedrop/message.xsl</value>
+    </property>
+  </bean>
+
+  <bean class="org.iocworkflow.test.sequence.ratedrop.WriteAudit" id="activity4"/>
+
+  <bean class="org.iocworkflow.test.sequence.ratedrop.SendMessage" id="activity5">
+    <property name="delegate">
+      <ref bean="smtpSenderDelegate"></ref>
+    </property>
+    <property name="errorHandler">
+      <ref bean="mailErrorHandler"/>
+    </property>
+  </bean>
+
+  <bean class="org.iocworkflow.test.sequence.ratedrop.smtp.MockSMTPService" id="smtpService"/>
+
+  <bean class="org.iocworkflow.test.sequence.ratedrop.SenderDelegateImpl" id="smtpSenderDelegate">
+    <property name="fromAddress">
+      <value>admin@superflightbookingsystem.com</value>
+    </property>
+    <property name="subject">
+      <value>Rate Drop Notification</value>
+    </property>
+    <property name="smtpService">
+      <ref bean="smtpService"/>
+    </property>
+  </bean>
+
+  <bean class="org.iocworkflow.test.sequence.ratedrop.RateDropErrorHandler" id="defaultErrorHandler"/>
+
+  <bean class="org.iocworkflow.test.sequence.ratedrop.MailErrorHandler" id="mailErrorHandler">
+    <property name="delegate">
+      <ref bean="smtpSenderDelegate"></ref>
+    </property>
+  </bean>
+
+  <bean class="org.iocworkflow.test.sequence.ratedrop.RateDropContext" id="processContext" singleton="false"/>
+
+
+  <!-- simple sequence workflow process -->
+  <bean class="org.iocworkflow.SequenceProcessor" id="rateDropProcessor">
+    <property name="activities">
+      <list>
+        <ref bean="activity1"/><!--Build recipients-->
+        <ref bean="activity2"/><!--Construct DOM tree-->
+        <ref bean="activity3"/><!--Apply XSL Transform-->
+        <ref bean="activity4"/><!--Write Audit Data-->
+        <ref bean="activity5"/><!--Attempt to send message-->
+      </list>
+    </property>
+    <property name="defaultErrorHandler">
+      <ref bean="defaultErrorHandler"></ref>
+    </property>
+    <property name="processContextClass">
+      <value>org.iocworkflow.test.sequence.ratedrop.RateDropContext</value>
+    </property>
+  </bean>
+
+
+</beans>
