@@ -318,6 +318,36 @@
   </dependencyManagement>
 
   <build>
+    <sourceDirectory>src/java</sourceDirectory>
+    <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
+    <unitTest>
+      <includes>
+        <include>**/*TestCase.java</include>
+      </includes>
+      <resources>
+        <resource>
+          <directory>src/test/org/iocworkflow/test</directory>
+          <targetPath>org/iocworkflow/test</targetPath>
+          <includes>
+            <include>**\*.xml</include>
+            <include>**\*.xsl</include>
+          </includes>
+        </resource>
+      </resources>
+    </unitTest>
+    <resources>
+      <resource>
+        <directory>src/conf</directory>
+        <includes>
+          <include>*.properties</include>
+        </includes>
+      </resource>
+
+    </resources>
+  </build>
+
+  <build>
+
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
@@ -326,14 +356,38 @@
     </plugins>
 
     <!-- Tạm thời comment để ứng dụng đọc được file template trong thư mục resource -->
-    <!--
     <resources>
       <resource>
         <directory>src/main/resources</directory>
         <filtering>true</filtering>
       </resource>
+      <resource>
+        <directory>src/conf</directory>
+        <includes>
+          <include>*.properties</include>
+        </includes>
+      </resource>
     </resources>
-     -->
+
+
+    <sourceDirectory>src/java</sourceDirectory>
+    <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
+    <unitTest>
+      <includes>
+        <include>**/*TestCase.java</include>
+      </includes>
+      <resources>
+        <resource>
+          <directory>src/test/org/iocworkflow/test</directory>
+          <targetPath>org/iocworkflow/test</targetPath>
+          <includes>
+            <include>**\*.xml</include>
+            <include>**\*.xsl</include>
+          </includes>
+        </resource>
+      </resources>
+    </unitTest>
+
   </build>
 
 </project>
