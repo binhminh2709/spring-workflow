@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE beans SYSTEM "http://www.springframework.org/dtd/spring-beans.dtd">
 <!-- ==========================================================================
 *     SPRING BEAN DEFINITION FILE
 *     Javaworld Article - Simple Sequence Workflow Example
   ========================================================================== -->
-<beans>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
   <bean class="org.iocworkflow.test.Log4jConfig" id="log4jconfig">
     <property name="configXml">
-      <value>org/iocworkflow/test/log4j.xml</value>
+      <value>log4j.xml</value>
     </property>
   </bean>
 
@@ -21,7 +22,7 @@
 
   <bean class="org.iocworkflow.test.sequence.simple.SimpleErrorHandler" id="defaultErrorHandler"/>
 
-  <bean class="org.iocworkflow.test.sequence.simple.SimpleContext" id="simpleContext" singleton="false"/>
+  <bean class="org.iocworkflow.test.sequence.simple.SimpleContext" id="simpleContext" scope="prototype"/>
 
 
   <!-- simple sequence workflow process -->

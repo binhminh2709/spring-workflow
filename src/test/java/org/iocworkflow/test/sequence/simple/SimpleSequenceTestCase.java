@@ -31,13 +31,17 @@ public class SimpleSequenceTestCase extends AbstractTestCase {
     return new TestSuite(SimpleSequenceTestCase.class);
   }
 
+  @Override
   protected void setUp() throws Exception {
-    String location = "org/iocworkflow/test/sequence/simple/sequenceSimple.xml";
+    System.out.println("----basedir:" + basedir);
+
+    String location = "/sequenceSimple.xml";
     context = new ClassPathXmlApplicationContext(location);
 
   }
 
   public void testSimpleSequence() throws Exception {
+
     BaseProcessor processor = (BaseProcessor) context.getBean("simpleProcessor");
     assertNotNull(processor);
 
@@ -47,6 +51,7 @@ public class SimpleSequenceTestCase extends AbstractTestCase {
     processor.doActivities();
   }
 
+  @Override
   protected void tearDown() throws Exception {
     ((ClassPathXmlApplicationContext) context).close();
   }

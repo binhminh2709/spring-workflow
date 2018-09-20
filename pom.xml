@@ -318,35 +318,6 @@
   </dependencyManagement>
 
   <build>
-    <sourceDirectory>src/java</sourceDirectory>
-    <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
-    <unitTest>
-      <includes>
-        <include>**/*TestCase.java</include>
-      </includes>
-      <resources>
-        <resource>
-          <directory>src/test/org/iocworkflow/test</directory>
-          <targetPath>org/iocworkflow/test</targetPath>
-          <includes>
-            <include>**\*.xml</include>
-            <include>**\*.xsl</include>
-          </includes>
-        </resource>
-      </resources>
-    </unitTest>
-    <resources>
-      <resource>
-        <directory>src/conf</directory>
-        <includes>
-          <include>*.properties</include>
-        </includes>
-      </resource>
-
-    </resources>
-  </build>
-
-  <build>
 
     <plugins>
       <plugin>
@@ -368,25 +339,6 @@
         </includes>
       </resource>
     </resources>
-
-
-    <sourceDirectory>src/java</sourceDirectory>
-    <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
-    <unitTest>
-      <includes>
-        <include>**/*TestCase.java</include>
-      </includes>
-      <resources>
-        <resource>
-          <directory>src/test/org/iocworkflow/test</directory>
-          <targetPath>org/iocworkflow/test</targetPath>
-          <includes>
-            <include>**\*.xml</include>
-            <include>**\*.xsl</include>
-          </includes>
-        </resource>
-      </resources>
-    </unitTest>
 
   </build>
 
