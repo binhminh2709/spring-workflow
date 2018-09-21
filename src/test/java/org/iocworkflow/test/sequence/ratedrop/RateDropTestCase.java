@@ -35,7 +35,7 @@ public class RateDropTestCase extends AbstractTestCase {
   }
 
   protected void setUp() throws Exception {
-    String location = "org/iocworkflow/test/sequence/ratedrop/rateDrop.xml";
+    String location = "src/test/resources/reatedrop/rateDrop.xml";
     context = new ClassPathXmlApplicationContext(location);
 
   }
@@ -72,10 +72,10 @@ public class RateDropTestCase extends AbstractTestCase {
    */
   private AirlineRouteSeedData createSeedData() {
     AirlineRouteSeedData seed = new AirlineRouteSeedData();
-    seed.setAirlineId(new Integer(12));
+    seed.setAirlineId(12);
     seed.setAirlineName("X-Jet");
     seed.setRateDrop(new BigDecimal("30.28"));
-    seed.setRouteId(new Integer(117));
+    seed.setRouteId(117);
     seed.setRouteOrigin("BWI");
     seed.setRouteDestination("LGA");
     return seed;

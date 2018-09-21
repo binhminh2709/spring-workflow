@@ -50,7 +50,10 @@ public class MailErrorHandler implements ErrorHandler {
    */
   public void setBeanName(String beanName) {
     this.beanName = beanName;
+  }
 
+  public String getBeanName() {
+    return beanName;
   }
 
   public void setDelegate(SenderDelegate delegate) {

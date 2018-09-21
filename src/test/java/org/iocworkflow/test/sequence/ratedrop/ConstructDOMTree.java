@@ -86,7 +86,7 @@ public class ConstructDOMTree extends BaseActivity {
       serializer.serialize(rateDOM);
       result = ((StringWriter) writer).getBuffer().toString();
     } catch (IOException e) {
-
+      log.error("IOException", e);
     }
     return result;
   }

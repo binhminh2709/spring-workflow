@@ -30,10 +30,10 @@ public class PollRates extends BaseActivity {
 
     log.debug("--- Polling for changes in rates ---");
     if (startTime == null) {
-      startTime = new Long(System.currentTimeMillis());
+      startTime = System.currentTimeMillis();
     }
     long now = System.currentTimeMillis();
-    if ((now - startTime.longValue()) > maxTime) {
+    if ((now - startTime) > maxTime) {
       log.debug("  !! Rate increase Found, kick off workflow processor !!");
       startTime = null;
       ((RateDropContext) context).setSeedData(createSeedData());
@@ -48,10 +48,10 @@ public class PollRates extends BaseActivity {
 
   private AirlineRouteSeedData createSeedData() {
     AirlineRouteSeedData seed = new AirlineRouteSeedData();
-    seed.setAirlineId(new Integer(14));
+    seed.setAirlineId(14);
     seed.setAirlineName("Poll-Jet");
     seed.setRateDrop(new BigDecimal("93.65"));
-    seed.setRouteId(new Integer(147));
+    seed.setRouteId(147);
     seed.setRouteOrigin("DFW");
     seed.setRouteDestination("LAX");
     return seed;

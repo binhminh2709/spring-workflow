@@ -33,9 +33,8 @@ public class PollingTestCase extends AbstractTestCase {
   protected void setUp() throws Exception {
     /*String[] locations = {"org/iocworkflow/test/sequence/ratedrop/rateDrop.xml",
         "org/iocworkflow/test/sequence/ratedrop/pollingRateDrop.xml"};*/
-    String[] locations = {"F:/workspace_minhnd/spring-workflow/src/test/java/org/iocworkflow/test/sequence/ratedrop/rateDrop.xml",
-        "F:/workspace_minhnd/spring-workflow/src/test/java/org/iocworkflow/test/sequence/ratedrop/pollingRateDrop.xml"};
-        context = new ClassPathXmlApplicationContext(locations);
+    String[] locations = {"/resources/reatedrop/rateDrop.xml", "/resources/reatedrop/pollingRateDrop.xml"};
+    context = new ClassPathXmlApplicationContext(locations);
 
   }
 
