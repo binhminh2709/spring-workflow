@@ -33,6 +33,9 @@ public class Activity3 extends BaseActivity {
     for (Iterator iter = simpleContext.getWorkflowData().iterator(); iter.hasNext(); i++) {
       String data = (String) iter.next();
       log.info(" +data[" + i + "]" + data);
+
+      setErrorHandler(new SimpleErrorHandler());
+      throw new RuntimeException();
     }
     log.info("++++++ ACTIVITY3 Finished ++++++++ ");
     return simpleContext;
