@@ -15,7 +15,9 @@
 
       <body>
         <h2>Price Drop Notification</h2>
-        <p><b>Great News!</b>This a message to inform you that a price drop of
+        <p>
+          <b>Great News!</b>
+          This a message to inform you that a price drop of
           $<xsl:value-of select="/rate-drop/@dropAmount"/> has occured for
           the ariline <xsl:value-of select="/rate-drop/airline/@name"/>. This price
           drop is for all routes from

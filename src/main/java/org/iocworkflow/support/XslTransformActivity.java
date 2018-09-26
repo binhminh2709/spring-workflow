@@ -35,11 +35,8 @@ public class XslTransformActivity extends BaseActivity {
   }
 
   private static void getXFormResult(Source xslSource, Source xmlSource, Result result) throws Exception {
-    TransformerFactory factory = null;
-    Transformer xformer = null;
-
-    factory = TransformerFactory.newInstance();
-    xformer = factory.newTransformer(xslSource);
+    TransformerFactory factory = TransformerFactory.newInstance();
+    Transformer xformer = factory.newTransformer(xslSource);
     xformer.transform(xmlSource, result);
 
   }

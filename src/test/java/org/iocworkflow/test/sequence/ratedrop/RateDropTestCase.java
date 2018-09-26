@@ -35,7 +35,7 @@ public class RateDropTestCase extends AbstractTestCase {
   }
 
   protected void setUp() throws Exception {
-    String location = "src/test/resources/reatedrop/rateDrop.xml";
+    String location = "/reatedrop/rateDrop.xml";
     context = new ClassPathXmlApplicationContext(location);
 
   }

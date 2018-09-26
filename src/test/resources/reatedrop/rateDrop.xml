@@ -9,7 +9,7 @@
 
   <bean class="org.iocworkflow.test.Log4jConfig" id="log4jconfig">
     <property name="configXml">
-      <value>org/iocworkflow/test/log4j.xml</value>
+      <value>log4j.xml</value>
     </property>
   </bean>
 
@@ -20,7 +20,7 @@
 
   <bean class="org.iocworkflow.support.XslTransformActivity" id="activity3">
     <property name="xslLocation">
-      <value>classpath:org/iocworkflow/test/sequence/ratedrop/message.xsl</value>
+      <value>classpath:/reatedrop/message.xsl</value>
     </property>
   </bean>
 
@@ -57,7 +57,7 @@
     </property>
   </bean>
 
-  <bean class="org.iocworkflow.test.sequence.ratedrop.RateDropContext" id="processContext" singleton="false"/>
+  <bean class="org.iocworkflow.test.sequence.ratedrop.RateDropContext" id="processContext" scope="prototype"/>
 
 
   <!-- simple sequence workflow process -->
