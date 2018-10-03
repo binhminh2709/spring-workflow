@@ -20,7 +20,7 @@
 
   <bean class="org.iocworkflow.support.XslTransformActivity" id="activity3">
     <property name="xslLocation">
-      <value>classpath:/reatedrop/message.xsl</value>
+      <value>reatedrop/message.xsl</value>
     </property>
   </bean>
 

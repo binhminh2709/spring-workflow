@@ -1,5 +1,7 @@
 package org.iocworkflow.support;
 
+import static org.springframework.util.ResourceUtils.CLASSPATH_URL_PREFIX;
+
 import java.io.StringWriter;
 import java.net.URL;
 import javax.xml.transform.Result;
@@ -13,6 +15,7 @@ import org.apache.commons.logging.LogFactory;
 import org.iocworkflow.BaseActivity;
 import org.iocworkflow.ProcessContext;
 import org.springframework.util.ResourceUtils;
+import org.springframework.util.SystemPropertyUtils;
 
 /**
  * Class:XslTransformActivity Creation Date: Mar 12, 2005 CVS ID $Id:$
@@ -49,7 +52,8 @@ public class XslTransformActivity extends BaseActivity {
   public ProcessContext execute(ProcessContext context) throws Exception {
 
     XsltAware xslContext = (XsltAware) context;
-    URL xslUrl = ResourceUtils.getURL(xslLocation);
+    String resolvedLocation = SystemPropertyUtils.resolvePlaceholders(CLASSPATH_URL_PREFIX + xslLocation);
+    URL xslUrl = ResourceUtils.getURL(resolvedLocation);
 
     log.debug("About to apply XSL transform");
     String transData = applyTransform(getXslSource(xslUrl), xslContext.getDomSource());
