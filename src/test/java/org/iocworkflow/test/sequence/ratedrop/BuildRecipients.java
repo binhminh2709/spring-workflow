@@ -40,9 +40,9 @@ public class BuildRecipients extends BaseActivity {
     //pretend to query here, note at the time of this writing airlineconsumer.com was
     //still available.
     Set recipients = new HashSet();
-    recipients.add("mary@airlineconsumer.com");
-    recipients.add("dingo@airlineconsumer.com");
-    recipients.add("blair@airlineconsumer.com");
+    recipients.add("minh.nd@ascendcorp.com");
+    //recipients.add("dingo@airlineconsumer.com");
+    //recipients.add("blair@airlineconsumer.com");
 
     log.debug("Found " + recipients.size() + " inerested recipients");
 

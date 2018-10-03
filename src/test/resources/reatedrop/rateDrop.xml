@@ -39,7 +39,7 @@
 
   <bean class="org.iocworkflow.test.sequence.ratedrop.SenderDelegateImpl" id="smtpSenderDelegate">
     <property name="fromAddress">
-      <value>admin@superflightbookingsystem.com</value>
+      <value>nguyendinhminh@gmail.com</value>
     </property>
     <property name="subject">
       <value>Rate Drop Notification</value>
